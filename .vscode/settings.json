@@ -1,0 +1,62 @@
+{
+    "latex-workshop.view.pdf.viewer": "tab",
+    "explorer.confirmDelete": false,
+    "editor.fontSize": 16,
+    "vim.foldfix": true,
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "latex-workshop.latex.outDir": "%DIR%/out",
+    "latex-workshop.view.pdf.backgroundColor": "#1e1e1e",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "make",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-bibtex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-outdir=%OUTDIR%",
+                "-pdf",
+                "%DOC%"
+            ],
+            "env": {}
+        }
+    ],
+    "cSpell.userWords": [
+        "colimits",
+        "coreflection",
+        "coreflections",
+        "estrest",
+        "finitary",
+        "Hossein",
+        "irreflexive",
+        "morphisms",
+        "Seyhani",
+        "unsynchronized"
+    ],
+    "editor.minimap.enabled": false,
+    "files.autoSaveDelay": 250,
+    "grammarly.files.include": [
+        "**/readme.md",
+        "**/README.md",
+        "**/*.txt",
+        "**/*.tex"
+    ],
+    "editor.wordWrap": "on",
+    "grammarly.config.documentDialect": "american",
+    "grammarly.config.documentDomain": "academic",
+    "local-history.saveDelay": 60,
+    "explorer.confirmDragAndDrop": false,
+    "local-history.enabled": 0,
+    "remote.downloadExtensionsLocally": true,
+    "remote.SSH.useFlock": false
+}
