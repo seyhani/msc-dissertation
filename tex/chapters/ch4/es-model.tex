@@ -1,0 +1,127 @@
+\section{مدل علی برای ساختمان رویداد}
+در ادامه نحوه‌ی توصیف یک ساختمان رویداد در قالب یک مدل علی را بیان می کنیم.
+
+فرض کنیم که
+$\mr{E} = (E,\#,\vdash)$
+یک ساختمان رویداد باشد.
+مدل علی این ساختمان رویداد را به صورت
+$\mc{M} = (\mc{s},\mc{F},\mc{E})$
+تعریف می‌کنیم که در آن
+$\mc{S} = (\mc{U},\mc{V},\mc{R})$.
+در این مدل فرض می‌کنیم همه‌ی متغیر‌ها از نوع بولی هستند.
+همچنین در این مدل متغیر برونی در نظر نمی‌گیریم بنابراین داریم
+$\mc{U} = \e$.
+اگر فرض کنیم مجموعه‌ رویدادها به صورت
+$E = \s{e_1,e_2,...,e_n}$
+باشد مجموعه‌ی متغیر‌های درونی را به صورت زیر تعریف می‌کنیم:
+\begin{align*}
+    \mathcal{V} = & \s{C_{e_i,e_j} |  1 \leq i < j \leq n.
+    e_i \in E \wedge e_j \in E}                              \\
+                  & \cup \s{EN_{s,e} | s \in \mathcal{P}(E),
+    e \in E. e \not \in s }                                  \\
+                  & \cup \s{M_{s,e} | s \in \mathcal{P}(E),
+        e \in E. e \not \in s } \cup \s{PV}
+\end{align*}
+به صورت شهودی به ازای هر عضو از رابطه‌های
+$\#,\vdash,\vdash_{min}$
+یک متغیر درونی در نظر می‌گیریم که درست بودن این متغیر به معنای وجود عنصر منتاظر با آن در رابطه است.
+به ازای
+$x,y \in \mc{P}(E)$
+پوشیده شدن 
+$x$
+توسط
+$y$
+را که با 
+$x \prec y$
+نمایش می‌دهیم به صورت زیر تعریف می‌کنیم:
+\begin{align*}
+    x \subseteq y \wedge x \neq y \wedge
+    (\forall z. x \subseteq z \subseteq y \Rightarrow x = z
+    \text{ or } y = z)
+\end{align*}
+همچنین به ازای هر متغیر 
+$X \in \mc{V}$
+بردار
+$\vec V_X$
+را بردار شامل همه‌ی متغیر‌های درونی به غیر از 
+$X$
+تعریف می‌کنیم.
+با استفاده از این تعاریف 
+توابع متغیر‌های درونی را به صورت زیر تعریف می‌کنیم:
+$$
+    \f{C_{e,e'}} = \begin{cases}
+        true  & \text{ if } e \# e'\\
+        false & \text{ otherwise }
+    \end{cases}
+$$
+$$
+    \f{M_{s,e}} = \begin{cases}
+        Min(s,e) \wedge Con(s) & \text{ if } s \vdash_{min} e \\
+        false                  & \text{ otherwise }
+    \end{cases}
+$$
+\begin{align*}
+    \f{EN_{s,e}} & =
+    \left(
+    M_{s,e} \vee
+    \left(
+    \bigvee_{s'\prec s}EN_{s',e}
+    \right)
+    \right)
+    \bigwedge
+    Con(s)
+\end{align*}
+که در آن‌ها داریم:
+\begin{align*}
+    Con(s)   & =   \left(
+    \bigwedge_{ 1\leq j<j' \leq n \wedge e_j,e_{j'} \in s}
+    \neg C_{e_j,e_{j'}}
+    \right)               \\
+    Min(s,e) & = \left(
+    \bigwedge_{s' \subseteq E. (s' \subset s \vee s \subset s')
+        \wedge e \notin s'}
+    \neg M_{s',e}
+    \right)
+\end{align*}
+فرض کنید که
+$\mathbb{E}$
+مجموعه‌ی تمامی سه‌تایی‌ها به فرم
+$(E,\#',\vdash')$
+باشد که داشته باشیم:
+\begin{align*}
+    \#' \subseteq E \times E \\
+    \vdash' \subseteq \mc{P}\times E
+\end{align*}
+یک تابع به فرم
+$ES: \times_{V \in \mathcal{V}\setminus \s{PV}} \mathcal{R}(V) \rightarrow \mathbb{E}$
+تعریف می‌کنیم که به صورت شهودی ساختمان رویداد حاصل از مقدار فعلی متغیر‌ها در مدل علی را به دست می‌دهد.
+فرض کنیم 
+$\vec v$
+برداری شامل مقادیر متغیرهای
+$\mc{V} \setminus \s{PV}$
+باشد.
+به ازای هر متغیر مانند 
+$V \in \mc{V}$
+مقدار آن در 
+$\vec v$
+را با
+$\vec v(V)$
+نمایش می‌دهیم.
+تابع 
+$ES$
+را به گونه‌ای تعریف می‌کنیم که اگر 
+$ES(\vec v) = (E,\#',\vdash')$
+آنگاه داشته باشیم:
+\begin{align*}
+    \forall e,e' \in E. e \#' e' \wedge e' \#' e
+     & \iff \vec{v}(C_{e,e'}) = \T \\
+    \forall s \in \mathcal{P}(E), e \in E.  s \vdash' e
+     & \iff \vec{v}(EN_{s,e}) = \T
+\end{align*}
+در نهایت فرض می‌کنیم که رفتار بد سیستمی که در قالب ساختمان رویداد مدل شده است، در قالب تابع متغیر 
+$PV$
+توصیف شده است و در صورتی که رفتار بد در سیستم وجود داشته باشد مقدار آن درست و در غیر این صورت غلط است.
+با استفاده از مدل علی که به این شکل توصیف شود برای پیدا کردن علت خطا کافی است علت واقعی 
+$PV=\T$
+را در مدل علی و مطابق تعریف پیدا کنیم.
+
