@@ -59,5 +59,9 @@
     "local-history.enabled": 0,
     "remote.downloadExtensionsLocally": true,
     "remote.SSH.useFlock": false,
-    "cSpell.language": "en,fa-IR,fa"
+    "cSpell.language": "en,fa-IR,fa",
+    "cSpell.words": [
+        "سینتکس",
+        "معادلاتی"
+    ]
 }

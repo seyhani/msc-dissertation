@@ -24,26 +24,26 @@ twoside
 \pagestyle{fancy}
 \pagenumbering{arabic} % 1, 2, ...
 
-% \include{./tex/chapter1}		% فصل اول: مقدمه
-% \include{./tex/chapter2}		% فصول دوم: مروری بر مطالعات انجام شده
-% \include{./tex/chapters/ch3/main.tex}		% فصل سوم: روش تحقیق
-% \include{./tex/chapters/ch4/main.tex}		% فصل چهارم: نتایج
-\include{./tex/chapters/ch4/main.tex}		% فصل چهارم: نتایج
-% \include{./tex/chapter5}		% فصل پنجم: بحث و نتیجه‌گیری
+% \include{./tex/chapter1}	
+\include{./tex/chapters/ch2/main.tex}
+% \include{./tex/chapters/ch3/main.tex}
+% \include{./tex/chapters/ch4/main.tex}
+% \include{./tex/chapters/ch4/main.tex}
+% \include{./tex/chapter5}	
 
 \pagestyle{empty}
 {
-\small
-\onehalfspacing
-\bibliographystyle{plain-fa} % or plainnat-fa for author-date
-\bibliography{/Users/amir/Data/Projects/personal/tehran-thesis/tex/references} }
+    \small
+    \onehalfspacing
+    \bibliographystyle{plain-fa} % or plainnat-fa for author-date
+    \bibliography{/Users/amir/Data/Projects/personal/tehran-thesis/tex/references} }
 
 \pagestyle{fancy}
 
 \addtocontents{toc}{
     \protect\renewcommand\protect\cftchappresnum{\appendixname~}%
     \protect\setlength{\cftchapnumwidth}{\mylenapp}}
-    
+
 % دستورات لازم برای شماره‌گذاری صفحات پیوست‌ها بشکل آ-۱ (فعلا با glossaries سازگار نیست)
 % \let\Chapter\chapter
 %\pretocmd{\chapter}{
@@ -63,9 +63,9 @@ twoside
 \printindex
 
 \begin{latin}
-\baselineskip=.6cm
-\latinabstract
-\latinTitlePage
+    \baselineskip=.6cm
+    \latinabstract
+    \latinTitlePage
 \end{latin}
 \label{LastPage}
 
