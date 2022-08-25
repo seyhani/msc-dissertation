@@ -1,9 +1,6 @@
 name: Compile Latex and Release PDF
 
-on:
-  push:
-    paths:
-      - "**"
+on: [push]
 
 jobs:
   build_latex:
@@ -39,5 +36,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: main.pdf
-          tag_name: ${{ env.GitVersion_MajorMinorPatch }}
+          tag_name: v0.1
           generate_release_notes: true
