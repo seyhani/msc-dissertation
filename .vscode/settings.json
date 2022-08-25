@@ -58,5 +58,6 @@
     "explorer.confirmDragAndDrop": false,
     "local-history.enabled": 0,
     "remote.downloadExtensionsLocally": true,
-    "remote.SSH.useFlock": false
+    "remote.SSH.useFlock": false,
+    "cSpell.language": "en,fa-IR,fa"
 }
