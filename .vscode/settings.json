@@ -61,7 +61,12 @@
     "remote.SSH.useFlock": false,
     "cSpell.language": "en,fa-IR,fa",
     "cSpell.words": [
+        "ازای",
+        "افراز",
+        "بیافتد",
+        "زیرمدل",
         "سینتکس",
+        "غیربازگشتی",
         "معادلاتی"
     ]
 }
