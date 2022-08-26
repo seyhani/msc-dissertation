@@ -4,13 +4,14 @@
 \cite{es}
 یک مدل محاسباتی
 \lf{Computational Model}
+غیر‌جای‌گذاری شده
+\lf{Non-Interleaving}
 برای پردازه‌های هم‌روند
 \lf{Concurrent}
 است.
-ساختمان رویداد یک مدل غیر جای‌گذاری
-\lf{Non-Interleaving}
-شده است.
-در این مدل، برخلاف مدل‌های جایگذاری شده مانند سیستم‌انتقال که هم‌روندی پردازه‌های موازی با انتخاب غیرقطعی مدل می‌شود، هم‌روندی پردازه‌ها به صورت صریح در مدل توصیف می‌شوند.
+در این مدل، برخلاف مدل‌های جایگذاری شده
+\lf{Interleaving}
+مانند سیستم‌انتقال که هم‌روندی پردازه‌های موازی با انتخاب غیرقطعی مدل می‌شود، هم‌روندی پردازه‌ها به صورت صریح در مدل توصیف می‌شوند.
 \begin{definition}{ساختمان رویداد}
     یک ساختمان رویداد یک سه‌تایی
     $(E,\#,\vdash)$
@@ -41,11 +42,23 @@
         Con = \s{X \subseteq E| \forall e,e' \in X. \neg(e\#e')}
     \end{align*}
 \end{definition}
+\begin{definition}
+    به ازای هر ساختمان رویداد، می‌توانیم رابطه‌ی فعال‌سازی مینیمال را به صورت زیر تعریف کنیم:
+    \begin{align*}
+        X \vdash_{min} e \iff X \vdash e \wedge
+        ( \forall Y \subseteq X . Y \vdash e \Rightarrow Y = X )
+    \end{align*}
+    همچنین در هر ساختمان رویدادی شرط زیر برقرار است:
+    \begin{align*}
+        Y \vdash e \Rightarrow \exists X \subseteq Y . X \vdash_{min} e
+    \end{align*}
+\end{definition}
+
 برای مشخص کردن وضعیت یک سیتم در هر لحظه از مفهومی به نام پیکر‌بندی
 \lf{Configuration}
 استفاده می‌شود و
 و یک مجموعه شامل رویدادهایی است که تا آن لحظه در سیستم رخ داده‌اند.
-\begin{definition}{پیکربندی}
+\begin{definition}
     اگر
     $\mathrm{E} = (E,\#,\vdash)$
     یک ساختمان رویداد باشد، یک پیکربندی آن یک زیرمجموعه از رویداد‌ها
@@ -63,19 +76,6 @@ $\mathrm{E}$
 $\mathcal{F}(\mathrm{E})$
 نمایش داده می‌شود.
 
-\begin{figure}
-    \centering
-    \begin{tikzpicture}[node distance={15mm},minimum size=10mm,
-            main/.style = {draw, circle}]
-        \node[main] (S)  {$s$};
-        \node[main] (H1) [above of=S,left of=S] {$h_1$};
-        \node[main] (H2) [above of=S,right of=S] {$h_2$};
-        \draw[->,thick] (H1) -- (S);
-        \draw[<-,thick] (S) -- (H2);
-    \end{tikzpicture}
-    \caption{}
-    \label{fig:es:update}
-\end{figure}
 شبکه‌ی موجود در شکل
 \ref{fig:es:update}
 را در نظر بگیرید.
@@ -94,7 +94,7 @@ $\mathcal{F}(\mathrm{E})$
 برای مجموعه‌ی پیکربندی‌های این ساختمان رویداد بر اساس رابطه‌ی زیرمجموعه است.
 برای مثالی که بیان شد می‌توان نموداری مطابق شکل
 \ref{fig:es:configs}
-زیر را رسم کرد:
+را رسم کرد.
 \begin{figure}
     \centering
     \begin{tikzpicture}[scale=0.8]
@@ -111,4 +111,18 @@ $\mathcal{F}(\mathrm{E})$
     \end{tikzpicture}
     \caption{}
     \label{fig:es:configs}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[node distance={15mm},minimum size=10mm,
+            main/.style = {draw, circle}]
+        \node[main] (S)  {$s$};
+        \node[main] (H1) [above of=S,left of=S] {$h_1$};
+        \node[main] (H2) [above of=S,right of=S] {$h_2$};
+        \draw[->,thick] (H1) -- (S);
+        \draw[<-,thick] (S) -- (H2);
+    \end{tikzpicture}
+    \caption{}
+    \label{fig:es:update}
 \end{figure}

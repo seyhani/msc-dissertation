@@ -38,8 +38,8 @@
     \begin{align*}
          & E' = \s{(0,a)} \cup \s{(1,e)|e \in E},                                                                       \\
          & e_0' \#' e_1'  \iff \exists e_0,e_1.e_0' = (1,e_0)
-        \ \& \ e_1' = (1,e_1) \ \& \ e_0 \# e_1                                                                         \\
-         & X \vdash' e' \iff e' = (0,a) \text{ or } [e' = (1,e_1) \ \& \ (0,a)\in X \ \& \ \s{e|(1,e)\in X} \vdash e_1]
+        \ \wedge \ e_1' = (1,e_1) \ \wedge \ e_0 \# e_1                                                                         \\
+         & X \vdash' e' \iff e' = (0,a) \text{ or } [e' = (1,e_1) \ \wedge \ (0,a)\in X \ \wedge \ \s{e|(1,e)\in X} \vdash e_1]
     \end{align*}
 \end{definition}
 
@@ -112,7 +112,7 @@
         E = \s{(0,e)|e \in E_0} \cup \s{(1,e)|e \in E_1}
     \end{align*}
     با استفاده از این مجموعه از رویداد‌ها توابع
-    $iota_k: E_k \ra E$
+    $\iota_k: E_k \ra E$
     را به صورت زیر و به ازای
     $k=0,1$
     تعریف می‌کنیم:
@@ -184,8 +184,8 @@
     رابطه‌ی فعال‌سازی  را به صورت زیر تعریف می‌کنیم:
     \begin{align*}
          & X \vdash e \iff X \in Con \wedge e \in \mathcal{E} \wedge        \\
-         & (\pi_0(e)\text{ is defined } \Rightarrow \pi_0X\vdash_0\pi_0(e))
-        \wedge (\pi_1(e)\text{ is defined } \Rightarrow \pi_1X\vdash_1\pi_1(e))
+         & (\pi_0(e)\text{ defined } \Rightarrow \pi_0X\vdash_0\pi_0(e))
+        \wedge (\pi_1(e)\text{ defined } \Rightarrow \pi_1X\vdash_1\pi_1(e))
     \end{align*}
     مجموعه‌ی برچسب‌های حاصلضرب را به صورت زیر تعریف می‌کنیم:
     \begin{align*}
@@ -213,7 +213,7 @@
     به
     $\Lambda$
     را به صورت
-    $\mr{E}\Lambda$
+    $\mr{E}\lceil\Lambda$
     و به شکل یک ساختمان رویداد برچسب‌گذاری شده به شکل
     $(E',\#',\vdash',L\cap\Lambda,l')$
     که در آن
@@ -227,7 +227,9 @@
 
 \subsection{معنای عبارات نت‌کت پویا در قالب ساختمان رویداد برچسب‌دار}
 
-در ادامه چگونگی تعریف معنا برای عبارت‌های نت‌کت پویا بیان می‌شود.
+در ادامه چگونگی تعریف معنا
+\lf{Semantic}
+برای عبارت‌های نت‌کت پویا بیان می‌شود.
 در نت‌کت پویا رفتار عبارت‌های نت‌کت فقط به صورت انتها به انتها در نظر گرفته می‌شوند.
 با توجه به همین موضوع در ادامه قسمتی از نت‌کت پویا مورد استفاده قرار می‌گیرد که عبارت‌های نت‌کت به صورت نرمال در آن ظاهر می‌شوند.
 اگر فرض کنیم که مجموعه‌ی فیلد‌ها
