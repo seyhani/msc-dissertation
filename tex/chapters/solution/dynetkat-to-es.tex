@@ -36,7 +36,7 @@
     $a\mr{E} = (E',\#',\vdash')$
     به گونه‌ای تعریف می‌شود که داشته باشیم:
     \begin{align*}
-         & E' = \s{(0,a)} \cup \s{(1,e)|e \in E},                                                                       \\
+         & E' = \s{(0,a)} \cup \s{(1,e)|e \in E},                                                                               \\
          & e_0' \#' e_1'  \iff \exists e_0,e_1.e_0' = (1,e_0)
         \ \wedge \ e_1' = (1,e_1) \ \wedge \ e_0 \# e_1                                                                         \\
          & X \vdash' e' \iff e' = (0,a) \text{ or } [e' = (1,e_1) \ \wedge \ (0,a)\in X \ \wedge \ \s{e|(1,e)\in X} \vdash e_1]
@@ -183,7 +183,7 @@
     \end{align*}
     رابطه‌ی فعال‌سازی  را به صورت زیر تعریف می‌کنیم:
     \begin{align*}
-         & X \vdash e \iff X \in Con \wedge e \in \mathcal{E} \wedge        \\
+         & X \vdash e \iff X \in Con \wedge e \in \mathcal{E} \wedge     \\
          & (\pi_0(e)\text{ defined } \Rightarrow \pi_0X\vdash_0\pi_0(e))
         \wedge (\pi_1(e)\text{ defined } \Rightarrow \pi_1X\vdash_1\pi_1(e))
     \end{align*}
@@ -266,23 +266,28 @@ $NetKAT^{-dup}$
 یک عبارت
 $p'$
 به فرم نرمال وجود دارد که داشته باشیم:
-$p\equiv p'$
-
-در ادامه از گرامر زیر برای توصیف عبارات شبکه استفاده می‌کنیم:
-\begin{align*}
-    F ::= & \alpha\cdot\pi                                          \\
-    D ::= & \bot | F;D | x?F;D | x!F;D | D \parallel D | D \oplus D
-\end{align*}
-بیانگری
-\lf{Expressiveness}
-گرامر بالا همچنان به اندازه‌ی نت‌کت پویا است.
+$p\equiv p'$.
+در ادامه از بخشی از زبان نت‌کت پویا که آن را نت‌کت پویا‌ نرمال می‌نامیم برای ارائه معنا در قالب ساختمان رویداد استفاده می‌کنیم.
+\begin{definition}
+    زبان نت‌کت پویا‌ نرمال را با دستور زبان زیر تعریف می‌کنیم:
+    \begin{align*}
+        F ::= & \alpha\cdot\pi                                          \\
+        D ::= & \bot | F;D | x?F;D | x!F;D | D \parallel D | D \oplus D
+    \end{align*}
+\end{definition}
+بر اساس لم ۹ در 
+\cite{dynetkat}
+به ازای هر عبارت 
+$p$
+در نت‌کت پویا یک عبارت معادل آن در نت‌کت پویا نرمال وجود دارد که داشته باشیم:
+$p \equiv q$.
 در ادامه فرض کنیم که
 $\mathcal{A}$
 مجموعه‌ی الفبا شامل تمامی حروف به شکل
 $\alpha\cdot\pi,x?F,x!F$
 باشد و داشته باشیم
 $\alpha \in \mathcal{A}$.
-معنای عبارت‌های بر روی زبان را به صورت زیر تعریف می‌کنیم:
+معنای عبارت‌های بر روی نت‌کت پویای نرمال را به صورت زیر تعریف می‌کنیم:
 \begin{align*}
     \sem{\bot}              & = (\e,\e)                               \\
     \sem{\alpha;t}          & = \alpha(\sem{t})                       \\
