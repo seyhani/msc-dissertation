@@ -4,12 +4,12 @@
 \cite{es}
 یک مدل محاسباتی
 \lf{Computational Model}
-غیر‌جای‌گذاری شده
+غیر‌برگ‌برگ شده
 \lf{Non-Interleaving}
 برای پردازه‌های هم‌روند
 \lf{Concurrent}
 است.
-در این مدل، برخلاف مدل‌های جایگذاری شده
+در این مدل، برخلاف مدل‌های برگ‌برگ شده
 \lf{Interleaving}
 مانند سیستم‌انتقال که هم‌روندی پردازه‌های موازی با انتخاب غیرقطعی مدل می‌شود، هم‌روندی پردازه‌ها به صورت صریح در مدل توصیف می‌شوند
 \cite{sassone1996models}.
@@ -31,7 +31,7 @@
               \lf{Enabling}
               است که شرط زیر را برقرار می‌کند:
               \begin{align*}
-                  X \vdash e \wedge X \subseteq Y \in Con
+                  (X \vdash e) \wedge (X \subseteq Y \in Con)
                   \Rightarrow Y \vdash e
               \end{align*}
     \end{enumerate}
@@ -40,7 +40,7 @@
     زیرمجموعه‌ای از مجموعه‌ی توانی رویدادها است که اعضای آن فاقد تعارض باشند.
     به صورت دقیق‌تر داریم:
     \begin{align*}
-        Con = \s{X \subseteq E| \forall e,e' \in X. \neg(e\#e')}
+        Con = \s{X \subseteq E ~|~ \forall e,e' \in X. \neg(e\#e')}
     \end{align*}
 \end{definition}
 \begin{definition}
@@ -67,7 +67,7 @@
     است که شرایط زیر را داشته باشد:
     \begin{enumerate}
         \item $x \in Con$
-        \item $\forall e \in x \exists e_0,...,e_n \in x. e_n = e \ \&
+        \item $\forall e \in x \exists e_0,...,e_n \in x. e_n = e \ \wedge
                   \forall i \leq n. \s{e_0,...,e_{i-1}} \vdash e_i$
     \end{enumerate}
 \end{definition}
