@@ -169,6 +169,7 @@
 	\else
 	\fi
 \else
+
 \ifx\@secondsupervisor\undefined%
 استاد راهنما
 {\Large\bfseries\par
@@ -178,7 +179,17 @@
 اساتید راهنما
 \par
 {\Large\bfseries \@firstsupervisor{} و \@secondsupervisor}
-\fi\fi}
+\fi
+
+\ifx\@secondadvisor\undefined%
+استاد مشاور
+{\Large\bfseries\par
+\@firstadvisor}
+\fi
+
+\fi
+
+}
 
 
 \par
@@ -268,7 +279,7 @@
 	\fi
 \else
 \ifx\@secondsupervisor\undefined%
-استاد راهنما
+استادز راهنما
 {\Large\bfseries\par
 \@firstsupervisor}
 \else
