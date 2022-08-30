@@ -24,8 +24,8 @@ $f_1,f_2,...,f_n$
 های مبدا و مقصد مثال‌هایی از این فیلد‌ها هستند.
 دستور زبان نت‌کت به صورت زیر تعریف می‌شود:
 \begin{align*}
-    a,b ::= & 1 | 0 | f = n | a + b | a \cdot b | \neg a  \\
-    p,q ::= & a | f \la n | p + q | p \cdot q | p^* | dup
+    a,b ::= & 1 ~|~ 0 ~|~ f = n ~|~ a + b ~|~ a \cdot b ~|~ \neg a  \\
+    p,q ::= & a ~|~ f \la n ~|~ p + q ~|~ p \cdot q ~|~ p^* ~|~ dup
 \end{align*}
 در این گرامر عبارت‌های
 $a,b$
@@ -40,6 +40,42 @@ $dup$
 و
 $f \la n$
 به آن اضافه شده است.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+            node distance={25mm},
+            sw/.style = {draw, circle,minimum size=8mm},
+            h/.style = {draw, rectangle,minimum size=8mm}
+        ]
+        \node[h] (h1)  {$H_1$};
+        \node[sw] (sa) [right of=h1]  {$S_A$};
+        \node[sw] (sb) [right of=sa] {$S_B$};
+        \node[h] (h2)  [right of=sb] {$H_2$};
+        \draw [thick] (h1)  -- node[above,pos=0.8]{1} (sa);
+        \draw [thick] (sa) -- node[above,pos=0.2]{2}
+        node[above,pos=0.8]{1}(sb);
+        \draw [thick] (sb) -- node[above,pos=0.2]{2} (h2);
+    \end{tikzpicture}
+    \caption{مثال شبکه}
+    \label{fig:netkat:ssh}
+\end{figure}
+برای مثال شبکه‌ی
+\ref{fig:netkat:ssh}
+را در نظر بگیرید که شامل دو
+\lf{Switch}
+A و ‌B
+و دو میزبان
+\lf{Host}
+است.
+هر سوییچ دو پورت دارد که با شماره‌های ۱ و۲ مشخص شده‌اند.
+با استفاده از عبارت نت‌کت زیر می‌توانیم رفتار سوییچ‌های این شبکه را توصیف کنیم:
+\begin{align}
+    \label{eq:netkat:swp}
+    p \triangleq (dst = H_1 \cdot pt \la 1) +
+    (dst = H_2 \cdot pt \la 2)
+\end{align}
+این عبارت همه‌ی بسته‌هایی که مقصد آن‌ها میزبان ۱ باشد را به پورت ۱ و همه‌ی بسته‌هایی که مقصد‌ آن‌ها میزبان ۲ باشد را به پورت شماره‌ی ۲ می‌فرستد.
+
 \subsection{مدل معنایی نت‌کت}
 برای اینکه امکان استدلال در مورد مسیر‌های طی شده توسط یک بسته‌ در شبکه وجود داشته باشد،از مفهومی به نام تاریخچه‌ی بسته
 \lf{Packet History}
@@ -79,7 +115,7 @@ $dup$
                                    \s{pk::h} & \text{ if } pk.f = n \\
                                    \s{}      & \text{ otherwise }
                                \end{cases}    \label{eq:netkat:filter}                  \\
-    \sem{\neg a}        & \teq \s{h} \setminus (\sem{a}h) \label{eq:netkat:nfilter}     \\
+    \sem{\neg a}h       & \teq \s{h} \setminus (\sem{a}h) \label{eq:netkat:nfilter}     \\
     \s{f \la n} (pk::h) & \teq \s{pk[f:=n]::h}     \label{eq:netkat:assign}             \\
     \sem{p+q}h          & \teq \sem{p}h \cup \sem{q}h   \label{eq:netkat:sum}           \\
     \sem{p\cdot q} h    & \teq (\sem{p} \bullet \sem{q}) h    \label{eq:netkat:dot}     \\
@@ -89,35 +125,60 @@ $dup$
     (f \bullet g) x     & \teq \bigcup\s{g(y)|y \in f(x)}                               \\
     \sem{dup} (pk::h)   & \teq \s{pk::(pk::h)} \label{eq:netkat:dup}
 \end{align}
-در معادلات بالا فرض می‌شود که 
+در معادلات بالا فرض می‌شود که
 $H$
 مجموعه‌ی تمامی تاریخچه‌های ممکن است.
-معادله‌ی 
+معادله‌ی
 \ref{eq:netkat:sem}
-بیان می‌کند که معنی هر عبارت نت‌کت روی یک تاریخچه‌ی بسته یک مجموعه از  
+بیان می‌کند که معنی هر عبارت نت‌کت روی یک تاریخچه‌ی بسته یک مجموعه از
 تاریخچه‌ی بسته‌های حاصل از اعمال این عبارت روی تاریخچه‌ی ورودی است.
-معادله‌ی 
+معادله‌ی
 \ref{eq:netkat:identity}
 بیان می‌کند که عبارت ۱ بسته را بدون شرط عبور می‌دهد.
-در مقابل معادله‌ی 
+در مقابل معادله‌ی
 \ref{eq:netkat:drop}
 رها شدن بسته را با خروجی یک مجموعه‌ی خالی مدل می‌کند.
-معادله‌ی 
+معادله‌ی
 \ref{eq:netkat:filter}
 بسته‌ی نخست ورودی را بررسی می‌کند و اگر مطابق با عبارت نبود بسته رها می‌شود.
+نقیض یک فیلتر در معادله‌ی
+\ref{eq:netkat:nfilter}
+توصیف شده است.
 معادله‌ی
 \ref{eq:netkat:assign}
-مقدار 
+مقدار
 $n$
 را به فیلد
 $f$
 بسته‌ی نخست تاریخچه اختصاص می‌دهد.
-در معادله‌ی 
+معادله‌ی
+\ref{eq:netkat:sum}
+جمع دو جمله را به صورت اجتماع تاریخچه‌های حاصل از اعمال هر یک از عملوند‌ها توصیف می‌کند.
+در معادله‌ی
+\ref{eq:netkat:dot}
+ترکیب متوالی دو جمله را به صورت ترکیب
+Kleisli
+دو جمله که به شکل زیر تعریف می‌شود توصیف می‌کند:
+\begin{align*}
+    (f \bullet g) x \triangleq \bigcup \s{g\ y ~|~ y \in f\ x}
+\end{align*}
+در معادله‌ی
 \ref{eq:netkat:kleene}
-حاصل اپراتور ستاره‌ی کلین
+حاصل اپراتور ستاره‌ی کلینی
 \lf{Kleene Star}
-معادل با اجتماع اعمال عبارت به تعداد دلخواه روی تاریخچه‌ی ورودی در نظر گرفته شده است.
-در نهایت معادله‌ی 
+معادل با اجتماع اعمال تابع‌های
+$F_i$
+روی تاریخچه‌ی ورودی در نظر گرفته شده است که تابع
+$F_i$
+حاصل
+$i$
+بار
+ترکیب
+Kleisli
+عبارت
+$p$
+است.
+در نهایت معادله‌ی
 \ref{eq:netkat:dup}
 یک کپی از بسته‌ی نخست ورودی را به ابتدای خروجی اضافه می‌کند.
 
@@ -168,53 +229,19 @@ n
 است.
 
 \subsection{توصیف رفتار شبکه با نت‌کت}
-
-در ادامه نحوه‌ی توصیف یک شبکه با استفاده از نت‌کت بیان می‌شود.
-\begin{figure}
-    \centering
-    \begin{tikzpicture}[
-            node distance={25mm},
-            sw/.style = {draw, circle,minimum size=8mm},
-            h/.style = {draw, rectangle,minimum size=8mm}
-        ]
-        \node[h] (h1)  {$H_1$};
-        \node[sw] (sa) [right of=h1]  {$S_A$};
-        \node[sw] (sb) [right of=sa] {$S_B$};
-        \node[h] (h2)  [right of=sb] {$H_2$};
-        \draw [thick] (h1)  -- node[above,pos=0.8]{1} (sa);
-        \draw [thick] (sa) -- node[above,pos=0.2]{2}
-        node[above,pos=0.8]{1}(sb);
-        \draw [thick] (sb) -- node[above,pos=0.2]{2} (h2);
-    \end{tikzpicture}
-    \caption{مثال شبکه}
-    \label{fig:netkat:ssh}
-\end{figure}
-در شکل
+در ادامه فرض کنید که بخواهیم شبکه‌ای مانند شکل
 \ref{fig:netkat:ssh}
-شبکه شامل دو سوییچ
-\lf{Switch}
-A و ‌B
-و دو هاست
-\lf{Host}
-می‌باشد.
-هر سوییچ دو پورت دارد که با شماره‌های ۱ و۲ مشخص شده‌اند.
-در این شبکه هدف این است که امکان جا‌به‌جایی همه‌ی بسته‌ها به غیر از بسته‌هایی که از نوع
+را توصیف کنیم که در آن بسته‌هایی که از نوع
 SSH
-هستند وجود داشته باشد.
-عبارت نت‌کت زیر را در نظر بگیرید:
-\begin{align*}
-    p \triangleq (dst = H_1 \cdot pt \la 1) +
-    (dst = H_2 \cdot pt \la 2)
-\end{align*}
-این عبارت همه‌ی بسته‌هایی که مقصد آن‌ها هاست ۱ باشد را به پورت ۱ و همه‌ی بسته‌هایی که مقصد‌ آن‌ها هاست ۲ باشد را به پورت شماره‌ی ۲ می‌فرستد.
-این سیاست
-\lf{Policy}
-به سادگی رفتار سوییچ‌ها را در نت‌کت تعریف می‌کند.
+هستند اجازه‌ی عبور نداشته باشند.
+همچنان می‌توانیم از سیاست توصیف شده توسط
+\ref{eq:netkat:swp}
+برای توصیف رفتار سوییچ‌ها استفاده کنیم.
 در ادامه می‌توان با اضافه کردن یک فیلتر به این عبارت، ویژگی دسترسی کنترل
 \lf{Access Control}
 را به این سیاست اضافه کرد تا همه‌ی بسته‌های از نوع
 SSH
-رها شوند:
+را رها کند:
 \begin{align*}
     p_{AC} \triangleq \neg(typ = SSH)\cdot p
 \end{align*}
@@ -239,7 +266,7 @@ SSH
 رفتار کل شبکه در واقع دنباله‌ای از اعمال این عبارت‌ها به صورت یکی در میان است.
 به عنوان مثال در شکل
 \ref{fig:netkat:ssh}
-یک بسته از هاست ۱ ابتدا توسط سوییچ
+یک بسته از میزبان ۱ ابتدا توسط سوییچ
 A
 پردازش شده، سپس روی لینک بین دو سوییچ جا به جا می‌شود و در نهایت توسط سوییچ
 B
@@ -285,7 +312,7 @@ $t$
 \ref{fig:netkat:ssh}
 برای بررسی اینکه همه‌ی بسته‌ها با نوع
 SSH
-از هاست ۱ رها می‌شوند کافی است تا تساوی زیر را ثابت کنیم:
+از میزبان ۱ رها می‌شوند کافی است تا تساوی زیر را ثابت کنیم:
 \begin{equation*}
     \begin{pmatrix}
         type = SSH \cdot sw = A \cdot pt = 1 \cdot \\
@@ -296,7 +323,7 @@ SSH
 \end{equation*}
 از طرفی برای بررسی یک خاصیت در شبکه، مثلا امکان فرستاده شدن‌ همه‌ی بسته‌هایی که از نوع
 SSH
-نیستند از هاست ۱ به هاست ۲
+نیستند از میزبان ۱ به میزبان ۲
 می‌توان به جای بررسی تساوی دو عبارت از نامساوی
 $p \leq q$
 استفاده کرد.
@@ -311,7 +338,7 @@ $q$
 \ref{fig:netkat:ssh}
 بسته‌های غیر
 $SSH$
-از هاست ۱ را عبور می‌دهد کافی است تا درستی نامعادله‌ی زیر را بررسی کرد:
+از میزبان ۱ را عبور می‌دهد کافی است تا درستی نامعادله‌ی زیر را بررسی کرد:
 \begin{equation*}
     \begin{pmatrix}
         \neg(type = SSH) \cdot sw = A \cdot pt = 1 \cdot & \\
@@ -319,3 +346,46 @@ $SSH$
     \end{pmatrix}
     \leq (p_{AC}\cdot t)^ *
 \end{equation*}
+اصول موضوعه‌ی نت‌کت یک سیستم اثبات
+\lf{Proof System}
+را تشکیل می‌دهند که امکان اثبات این معادله یا نامعادله‌ها را فراهم می‌کنند.
+مثلا فرض کنید که سیاست دسترسی‌کنترل برای رها کردن بسته‌های
+SSH
+\ref{fig:netkat:ssh}
+را برای افزایش کارایی فقط در سوییچ
+A
+انجام دهیم:
+\begin{align*}
+    p_A \triangleq (sw = A \cdot \neg(typ = \texttt{SSH})\cdot p)
+    + (sw = B \cdot p)
+\end{align*}
+به طریق مشابه می‌توانیم این کار را در سوییچ
+B
+هم انجام دهیم:
+\begin{align*}
+    p_B (sw = A\cdot p) \triangleq (sw = B \cdot \neg(typ = \texttt{SSH})\cdot p)
+\end{align*}
+فرض کنید مکان‌های ورودی و خروجی به صورت زیر تعریف شده باشند:
+\begin{align*}
+    in  & \triangleq (sw = A \cdot pt = 1) \\
+    out & \triangleq (sw = B \cdot pt = 2)
+\end{align*}
+اثبات معادل بودن دو سیاست
+$p_A$
+و
+$p_B$
+بر اساس این ورودی و خروجی در شکل
+\ref{fig:netkat:proof}
+ذکر شده است.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm]{proof.png}
+    \caption{اثبات معادل بودن
+        $p_A$
+        و
+        $p_B$
+        \cite{netkat}
+    }
+    \label{fig:netkat:proof}
+\end{figure}
