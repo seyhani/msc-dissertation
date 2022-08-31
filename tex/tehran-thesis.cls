@@ -279,7 +279,7 @@
 	\fi
 \else
 \ifx\@secondsupervisor\undefined%
-استادز راهنما
+استاد راهنما
 {\Large\bfseries\par
 \@firstsupervisor}
 \else
