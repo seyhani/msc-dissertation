@@ -1,38 +1,45 @@
 The emerging use of Software-Defined Networks instead of 
 traditional networking approaches have enabled us to 
-use formal verification methods more frequently on such 
+use formal verification methods more easily on such 
 systems which result in more reliable networks.
 But when an error is detected, the task of finding why  
-the system doesn't work as expected remains as a burden 
-in front of debugging procedure and the output of 
-verification tools such as certificates or counterexamples
-does not provide enough understanding of the problem.
-Counterfactual causal reasoning, which has a long research
-history in the philosophy literature is concerned with 
-explaining phenomena by finding their cause.
-Halpern and Pearl provided a mathematical formulation of 
-the actual cause based on Counterfactual reasoning.
-This formulation has been used in several researches in 
-order to use the actual cause of an error to provide 
-an explanation of the system problem.
+the system doesn't work as expected still remains and a person
+needs to manually investigate the problem and find out how 
+to fix the system. 
+In the case of failure, verification tools produce 
+a certificate or counterexample but such evidence does not
+provide enough understanding of the problem.
 
-In this research, we use this notion of causality in the 
-context of Software-Defined Networks. 
+Explaining phenomena with causal reasoning has been studied for
+centuries in the philosophical literature which is distilled as
+the counterfactuality principle.
+Halpern and Pearl proposed a mathematical formulation of 
+the actual cause based on Counterfactual reasoning.
+This formulation has been used in several research projects in 
+order to use the actual cause of an error to provide 
+an explanation of the system's problem.
+
+In this research, we use Halpern and Pearl's notion of causality 
+in the context of Software-Defined Networks to explain failures.
 More specifically we provide a causal model which can be used
 to reason about which constructs of the network, such as 
 existence of concurrency or order between network updates, can
 be considered as an actual cause of the network's unsafe behavior
 which results in a property violation.
 
-To encode network programs we use DyNetKAT, which is a simple and high level network programming language that can be compiled into
-OpenFlow switches flow table. DyNetKAT is build upon NetKAT and
-while preserves its minimality, it enables the encoding of 
-dynamic updates in networks. We use event structures as a semantic
+To encode network programs we use DyNetKAT, which is a simple and 
+high-level network programming language that can be compiled into
+the flow table of OpenFlow switches. DyNetKAT is built upon 
+NetKAT and while preserving its minimality, it enables the
+ encoding of dynamic updates in networks. We use event structures
+as a semantic
 model of DyNetKAT programs which allows us to explicitly encode 
-concurrency, so such relations may also be considered as a cause
-while this is not possible in an interleaving model. 
+concurrency and as a result, such relations may also be 
+considered as a cause while this is not possible in an 
+interleaving model. 
 We used our model to explain the violation of some well-known 
-network properties and while there is no measurement or method to 
-evaluate causal analysis, it seems that causes of our model
-matches our intuition of the root of the problem in the network.
-
+network properties by finding the actual cause of the failure.
+While there is no measurement or method to 
+evaluate causal analysis, it seems that the causes found by our 
+model matches the intuition of the root cause of the problem in 
+the network.
