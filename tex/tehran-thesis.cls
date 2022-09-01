@@ -388,7 +388,7 @@
 \hline
 \ifx\@firstadvisor\undefined%
 \else \stepcounter{davaranCounter}
-\arabic{davaranCounter} & استاد مشاور & \@firstadvisor & \@firstadvisorrank & دانشگاه تهران & \rule[-.3\baselineskip]{0pt}{2\normalbaselineskip} \\
+\arabic{davaranCounter} & استاد مشاور & \@firstadvisor & \@firstadvisorrank & کینگز کالج لندن & \rule[-.3\baselineskip]{0pt}{2\normalbaselineskip} \\
 \fi
 \ifx\@secondadvisor\undefined%
 \else \stepcounter{davaranCounter}
