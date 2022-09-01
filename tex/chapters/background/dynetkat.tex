@@ -14,8 +14,8 @@
 \begin{align*}
     N & :: = \mathrm{NetKAT}^{-dup}                    \\
     D & :: = \bot ~|~ N;D ~|~ x?N;D ~|~ x!N;D ~|~ D\parallel D
-    ~|~ D \oplus D ~|~ X                                     \\
-      & X \triangleq D
+    ~|~ D \oplus D ~|~ \delta_{\mc{L}}(D) ~|~ X                                     \\
+      & X \triangleq D, \mc{L} = \s{c ~|~ c ::= x?N ~|~ x!N}
 \end{align*}
 در سینتکس بالا
 $\mathrm{NetKAT}^{-dup}$
@@ -49,11 +49,17 @@ $x$
 دو عبارت توسط
 $D \parallel D$
 توصیف می‌شود.
-در نهایت رفتار‌های غیرقطعی
+رفتار‌های غیرقطعی
 \lf{Non-Deterministic}
 توسط‌ عبارت‌هایی به شکل
 $D \oplus D$
 توصیف می‌شوند.
+عملگر 
+$\delta_{\mc{L}}$
+باعث می‌شود تا از اجرای عملیات‌های غیر مجاز، که با مجموعه‌ی 
+$\mc{L}$
+مشخص می‌شوند، 
+جلوگیری شود.
 
 \subsection{معنای عملیاتی نت‌کت پویا}
 معنای عملیاتی
@@ -157,7 +163,14 @@ $x?q$
         (s,H,H') \xrightarrow{x!p} (s',H,H')
     }{
         (q\parallel s,H,H') \xrightarrow{rcfg(x,p)} (q'\parallel s',H,H')
-    } \label{os:syncl}
+    } \label{os:syncl} \\
+    & (\delta) \frac{
+        (p,H_0,H_1) \xrightarrow{\gamma} (p',H_0',H_1')
+    }{
+        (\delta_{\mc{L}}(p),H_0,H_1)
+        \xrightarrow{\gamma}
+        (\delta_{\mc{L}}(p',H_0',H_1'))
+    }\gamma \not \in \mc{L} \label{os:restrict}
 \end{align}
 قانون 
 \ref{os:term}
@@ -204,6 +217,17 @@ $\gamma$
 توصیف شده است که در آن دو یکی از پردازه‌ها امکان ارسال و دیگری امکان دریافت پیام را دارد و در نتیجه در پردازه‌ حاصل از توازی آن‌ها امکان انجام یک عملیات هنگام از نوع 
 $rcfg$
 وجود دارد که معادل همگام‌سازی عملیات‌های ارسال و دریافت پیام است.
+قانون
+\ref{os:restrict}
+محدود کردن پردازه توسط یک مجموعه 
+$\mc{L}$
+از عملیات‌های غیرمجاز را توصیف می‌کند که در آن
+$\mc{L}$
+شامل عملیات‌هایی به فرم 
+$x?N$
+یا
+$x!N$
+است. 
 
 \subsection{توصیف برنامه‌ها در نت‌کت پویا}
 
