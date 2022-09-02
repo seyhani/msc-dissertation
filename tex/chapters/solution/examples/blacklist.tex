@@ -97,10 +97,10 @@ $N,P,Q$
         {$n_4:(\checkmark,\his{},\sigma_d)$};
         \node[s] (n2) [below right of=n0]
         {$n_2: (\delta_{\mc{L}}(N_q \parallel P),\sigma_a,\his{}$)};
-        \draw[->] (n0) -- node[left]{$rcfg(p!1,p?1)$} (n1);
-        \draw[->] (n0) -- node[right]{$rcfg(q!1,q?1)$} (n2);
-        \draw[->] (n1) -- node[left]{$rcfg(q!1,q?1)$} (n3);
-        \draw[->] (n2) -- node[right]{$rcfg(p!1,p?1)$} (n3);
+        \draw[->] (n0) -- node[left]{$rcfg(p,1)$} (n1);
+        \draw[->] (n0) -- node[right]{$rcfg(q,1)$} (n2);
+        \draw[->] (n1) -- node[left]{$rcfg(q,1)$} (n3);
+        \draw[->] (n2) -- node[right]{$rcfg(p,1)$} (n3);
         \draw[->] (n3) -- node[left]{$(\sigma_a,\sigma_d)$} (n4);
     \end{tikzpicture}
     \caption{}
@@ -153,8 +153,8 @@ $PV$
 $a \ra d$
 باشد توصیف می‌کند.
 با توجه به ترتیب اجرای به‌روز‌رسانی‌ها در شبکه دو رویداد برای هر یک از عملیات‌های
-$rcfg(p!1,p?1)$،
-$rcfg(q!1,q?1)$
+$rcfg(p,1)$،
+$rcfg(q,1)$
 و
 $a \ra d$
 در ساختمان رویداد وجود دارد.
@@ -162,10 +162,10 @@ $a \ra d$
 $p_1,p_2,q_1,q_2,ad_1,ad_2$
 وجود داشته باشد که برچسب آن‌ها به صورت زیر باشد:
 \begin{align*}
-    l(p_1) & = rcfg(p!1,p?1) \\
-    l(p_2) & = rcfg(p!1,p?1) \\
-    l(q_1) & = rcfg(q!1,q?1) \\
-    l(q_2) & = rcfg(q!1,q?1) \\
+    l(p_1) & = rcfg(p,1) \\
+    l(p_2) & = rcfg(p,1) \\
+    l(q_1) & = rcfg(q,1) \\
+    l(q_2) & = rcfg(q,1) \\
     l(ad_1) & = a \ra d \\
     l(ad_2) & = a \ra d 
 \end{align*}

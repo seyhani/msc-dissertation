@@ -88,11 +88,11 @@ $b$
         {$n_4:(F,\sigma_b,\his)$};
         \node[s] (n5) [below of=n4]
         {$n_5:(\checkmark,\his{},\sigma_d)$};
-        \draw[->] (n0) -- node[left]{$rcfg(p!1,p?1)$} (n1);
-        \draw[->] (n0) -- node[right]{$rcfg(q!1,q?1)$} (n2);
+        \draw[->] (n0) -- node[left]{$rcfg(p,1)$} (n1);
+        \draw[->] (n0) -- node[right]{$rcfg(q,1)$} (n2);
         \draw[->] (n1) -- node[left]{$(\sigma_b,\sigma_b)$} (n3);
-        \draw[->] (n1) -- node[above]{$rcfg(q!1,q?1)$} (n4);
-        \draw[->] (n2) -- node[right]{$rcfg(p!1,p?1)$} (n4);
+        \draw[->] (n1) -- node[above]{$rcfg(q,1)$} (n4);
+        \draw[->] (n2) -- node[right]{$rcfg(p,1)$} (n4);
         \draw[->] (n4) -- node[right]{$(\sigma_b,\sigma_d)$} (n5);
     \end{tikzpicture}
     \caption{}
@@ -131,18 +131,18 @@ $b \ra b$
 $c \ra c$
 در شبکه است.
 همانند مثال قبل با توجه به ترتیب اجرای به‌روز‌رسانی‌ها در شبکه دو رویداد برای هر یک از عملیات‌های
-$rcfg(p!1,p?1)$
+$rcfg(p,1)$
 و
-$rcfg(q!1,q?1)$
+$rcfg(q,1)$
 در ساختمان رویداد وجود دارد.
 فرض کنید برای رویداد‌های مرتبط با این عملیات‌ها چهار رویداد
 $p_1,p_2,q_1,q_2$
 وجود داشته باشد که برچسب آن‌ها به صورت زیر باشد:
 \begin{align*}
-    l(p_1) & = rcfg(p!1,p?1) \\
-    l(p_2) & = rcfg(p!1,p?1) \\
-    l(q_1) & = rcfg(q!1,q?1) \\
-    l(q_2) & = rcfg(q!1,q?1)
+    l(p_1) & = rcfg(p,1) \\
+    l(p_2) & = rcfg(p,1) \\
+    l(q_1) & = rcfg(q,1) \\
+    l(q_2) & = rcfg(q,1)
 \end{align*}
 همچنین فرض کنید برچسب رویداد‌های
 $bb,cc$
